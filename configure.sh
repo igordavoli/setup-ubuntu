@@ -118,7 +118,7 @@ echo GTK_IM_MODULE=cedilla | sudo tee -a  /etc/environment > /dev/null
 # set may amd rx6700xt fan curves
 cd /usr/local/src/
 sudo git clone https://github.com/grmat/amdgpu-fancontrol.git
-echo -e "TEMPS=( 49000 60000 70000  )\nPWMS=( 0 180 255 )" | sudo tee /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.cfg > /dev/null
+echo -e "TEMPS=( 49000 60000 70000 )\nPWMS=( 0 180 255 )" | sudo tee /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.cfg > /dev/null
 sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.cfg /etc/amdgpu-fancontrol.cfg
 sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol /usr/bin/amdgpu-fancontrol
 sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.service /etc/systemd/system/amdgpu-fancontrol.service
