@@ -112,6 +112,9 @@ do
 	gsettings set org.gnome.${GNOME_CONFIGS[$i]}
 done
 
+# fix cedilla isue in english intl keyboards
+echo GTK_IM_MODULE=cedilla | sudo tee -a  /etc/environment > /dev/null
+
 # generate github ssh key
 ssh-keygen -t rsa -b 4096 -C $GIT_HUB_EMAIL -f $SSH_DIR/github
 touch $SSH_DIR/config && echo -e $SSH_CONFIG_CONTENT> SSH_DIR/config 
