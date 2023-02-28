@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# script for configure may ubuntu pc
+# script for configure my ubuntu 22.04 jammy jelyfish pc
 GIT_HUB_EMAIL=igordavoli@gmail.com
 
 SSH_DIR=$HOME/.ssh
