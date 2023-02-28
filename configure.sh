@@ -1,7 +1,16 @@
 #! /bin/bash
 
+# script for configure may ubuntu pc
 GIT_HUB_EMAIL=igordavoli@gmail.com
 
+SSH_DIR=$HOME/.ssh
+
+SSH_CONFIG_CONTENT=\
+"Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github
+"
 PACKEGES=(
 "build-essential"
 "curl"
@@ -20,7 +29,6 @@ SNAPS=(
 "insomnia" 
 "spotify"
 )
-
 
 VSCODE_EXTENSIONS=(
 "cschlosser.doxdocgen"
@@ -48,6 +56,7 @@ GNOME_CONFIGS=(
 "shell.extensions.dash-to-dock extend-height false"
 "shell.extensions.dash-to-dock isolate-monitors true"
 "shell.extensions.dash-to-dock isolate-workspaces true"
+"shell favorite-apps ['snap-store_ubuntu-software.desktop', 'org.gnome.Nautilus.desktop', 'code_code.desktop', 'google-chrome.desktop', 'discord_discord.desktop', 'dbeaver-ce_dbeaver-ce.desktop', 'insomnia_insomnia.desktop', 'vlc.desktop', 'spotify_spotify.desktop']"
 )
 
 # update and upgrade packages
@@ -57,19 +66,19 @@ sudo apt upgrade -y
 # install packages
 for ((i = 0; i < ${#PACKEGES[@]}; i++))
 do
-    sudo snap install ${PACKEGES[$i]}
+	sudo snap install ${PACKEGES[$i]}
 done
 
 # install snaps
 for ((i = 0; i < ${#SNAPS[@]}; i++))
 do
-    sudo snap install ${SNAPS[$i]}
+	sudo snap install ${SNAPS[$i]}
 done
 
 # install vscode extensions
 for ((i = 0; i < ${#VSCODE_EXTENSIONS[@]}; i++))
 do
-    code --install-extension ${VSCODE_EXTENSIONS[$i]}
+	code --install-extension ${VSCODE_EXTENSIONS[$i]}
 done
 
 # install n 
@@ -100,12 +109,13 @@ apt install papirus-icon-theme -y
 # # set theme configs
 for ((i = 0; i < ${#GNOME_CONFIGS[@]}; i++))
 do
-    gsettings set org.gnome.${GNOME_CONFIGS[$i]}
+	gsettings set org.gnome.${GNOME_CONFIGS[$i]}
 done
 
 # generate github ssh key
-ssh-keygen -t rsa -b 4096 -C $GIT_HUB_EMAIL -f $HOME/.ssh/github
-
+ssh-keygen -t rsa -b 4096 -C $GIT_HUB_EMAIL -f $SSH_DIR/github
+touch $SSH_DIR/config && echo -e $SSH_CONFIG_CONTENT> SSH_DIR/config 
+cat SSH_DIR/github.pub
 
 
 
