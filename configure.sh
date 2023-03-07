@@ -64,6 +64,7 @@ GNOME_CONFIGS=(
 	"shell.extensions.dash-to-dock show-mounts false"
 	"shell.extensions.dash-to-dock show-mounts-network false"
 	"shell.extensions.dash-to-dock show-mounts-only-mounted true"
+	"shell.extensions.ding show-home false"
 	"shell favorite-apps ['snap-store_ubuntu-software.desktop', 'org.gnome.Nautilus.desktop', 'code_code.desktop', 'google-chrome.desktop', 'discord_discord.desktop', 'dbeaver-ce_dbeaver-ce.desktop', 'insomnia_insomnia.desktop', 'vlc.desktop', 'spotify_spotify.desktop']"
 )
 
