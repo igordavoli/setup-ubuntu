@@ -5,6 +5,8 @@ GIT_HUB_EMAIL=igordavoli@gmail.com
 
 SSH_DIR=$HOME/.ssh
 
+USERNAME=igordavoli
+
 SSH_CONFIG_CONTENT=\
 "Host github.com
     HostName github.com
@@ -20,6 +22,7 @@ PACKEGES=(
 "nodejs"
 "npm"
 "vlc"
+# "corectrl"
 )
 
 SNAPS=(
@@ -60,6 +63,7 @@ GNOME_CONFIGS=(
 )
 
 # update and upgrade packages
+sudo add-apt-repository ppa:ernstp/mesarc -y
 sudo apt update -y
 sudo apt upgrade -y
 
@@ -115,15 +119,17 @@ done
 # fix cedilla isue in english intl keyboards
 echo GTK_IM_MODULE=cedilla | sudo tee -a  /etc/environment > /dev/null
 
-# set may amd rx6700xt fan curves
-cd /usr/local/src/
-sudo git clone https://github.com/grmat/amdgpu-fancontrol.git
-echo -e "TEMPS=( 49000 60000 70000 )\nPWMS=( 0 180 255 )" | sudo tee /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.cfg > /dev/null
-sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.cfg /etc/amdgpu-fancontrol.cfg
-sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol /usr/bin/amdgpu-fancontrol
-sudo ln -s /usr/local/src/amdgpu-fancontrol/amdgpu-fancontrol.service /etc/systemd/system/amdgpu-fancontrol.service
-sudo systemctl enable amdgpu-fancontrol.service
-sudo systemctl start amdgpu-fancontrol.service
+# set corectrl to initialize with startup and don't request root permissions
+# cp /usr/share/applications/org.corectrl.corectrl.desktop ~/.config/autostart/org.corectrl.corectrl.desktop
+# echo \ 
+# "[User permissions]
+# Identity=unix-group:$USERNAME
+# Action=org.corectrl.*
+# ResultActive=yes" \
+#  | sudo tee -a  /etc/polkit-1/localauthority/50-local.d/90-corectrl.pkla > /dev/null
+
+# GRUB_CMDLINE_LINUX_DEFAULT="<other_params>... amdgpu.ppfeaturemask=0xffffffff"
+# grub-mkconfig -o /boot/grub/grub.cfg
 
 # generate github ssh key
 ssh-keygen -t rsa -b 4096 -C $GIT_HUB_EMAIL -f $SSH_DIR/github
